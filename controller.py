@@ -5,7 +5,7 @@ from compute import compute
 app = Flask(__name__)
 
 @app.route('/')
-def home():
+def index():
     # form = InputForm(request.form)
     # if request.method == 'POST' and form.validate():
     #     result = compute(form.a.data, form.b.data,form.c.data, form.d.data,form.e.data,form.z.data,form.g.data,form.h.data,form.i.data)
@@ -14,7 +14,7 @@ def home():
     return render_template('header.html')
 
 
-@app.route('/home')
+@app.route('/home/')
 def home():
     # form = InputForm(request.form)
     # if request.method == 'POST' and form.validate():
