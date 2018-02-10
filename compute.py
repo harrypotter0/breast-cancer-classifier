@@ -13,7 +13,7 @@ from flask import Flask, render_template, request
 def compute ( a,b,c,d,e,z,g,h,i):
 
 
-# Preparing the data:
+# Preparing the data
       data_file_name = 'breast-cancer-wisconsin.data.txt'
 
       first_line = "id,clump_thickness,unif_cell_size,unif_cell_shape,marg_adhesion,single_epith_cell_size,bare_nuclei,bland_chrom,norm_nucleoli,mitoses,class"
@@ -35,20 +35,20 @@ def compute ( a,b,c,d,e,z,g,h,i):
       CANCER_TRAINING = "cancer_training.csv"
       CANCER_TEST = "cancer_test.csv"
 
-# Load datasets.
+# Load datasets
       training_set = tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TRAINING,
                                                        target_dtype=np.int, features_dtype=np.int)
       test_set =     tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TEST,
                                                    target_dtype=np.int, features_dtype=np.int)
 
       feature_columns = [tf.contrib.layers.real_valued_column("", dimension=9)]
-        
+
       classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                               hidden_units=[10, 20, 10],
                                               n_classes=2,
                                               model_dir="/tmp/iris_model")
 
-# Fit model.
+# Fitting model
       classifier = classifier.fit(training_set.data, training_set.target, steps=2000)
       k =a
       l = b
@@ -58,20 +58,20 @@ def compute ( a,b,c,d,e,z,g,h,i):
       p = z
       q = g
       r = h
-      s  = i   
-               
+      s  = i
+
       def new_samples():
           return np.array([[k, l, m, n, o, p, q, r, s],
                    ], dtype=np.float32)
 
-      s = list(classifier.predict(input_fn=new_samples))    
+      s = list(classifier.predict(input_fn=new_samples))
 
 
       if (s == [[1]]):
-            return "malignant"
+            return "MALIGNANT"
       else:
-            return "benign"
+            return "BENIGN"
 
 if __name__ == '__main__':
-    
+
       print (compute(a,b,c,d,e,f,g,h,i))
