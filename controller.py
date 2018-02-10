@@ -14,6 +14,7 @@ def index():
     return render_template('header.html')
 
 
+
 @app.route('/home/')
 def home():
     # form = InputForm(request.form)
@@ -32,14 +33,14 @@ def usingdata():
         result = None
     return render_template('usingdata.html', form=form, result=result)
 
-@app.route('/usingimages/')
-def usingimages():
+@app.route('/moreinfo/')
+def moreinfo():
     # form = InputForm(request.form)
     # if request.method == 'POST' and form.validate():
     #     result = compute(form.a.data, form.b.data,form.c.data, form.d.data,form.e.data,form.z.data,form.g.data,form.h.data,form.i.data)
     # else:
     #     result = None
-    return render_template('usingimages.html')
+    return render_template('moreinfo.html')
 
 @app.route('/preventivemeasures/')
 def preventivemeasures():
