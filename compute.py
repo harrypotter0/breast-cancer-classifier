@@ -9,7 +9,6 @@ from model import InputForm
 from flask import Flask, render_template, request
 
 
-
 def compute ( a,b,c,d,e,z,g,h,i):
 
 
@@ -35,21 +34,47 @@ def compute ( a,b,c,d,e,z,g,h,i):
       CANCER_TRAINING = "cancer_training.csv"
       CANCER_TEST = "cancer_test.csv"
 
+######################################
+# classifier
 # Load datasets
-      training_set = tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TRAINING,
+      training_set_classifier = tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TRAINING,
                                                        target_dtype=np.int, features_dtype=np.int)
-      test_set =     tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TEST,
+      test_set_classifier =     tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TEST,
                                                    target_dtype=np.int, features_dtype=np.int)
 
       feature_columns = [tf.contrib.layers.real_valued_column("", dimension=9)]
 
-      classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
+      classifier_classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                               hidden_units=[10, 20, 10],
                                               n_classes=2,
                                               model_dir="/tmp/iris_model")
+      #####################################
+      # Accuracy
+      # Load datasets.
+      training_set_accuracy = tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TRAINING,
+                                                             target_dtype=np.int,
+                                                             features_dtype=np.float32,
+                                                             target_column=-1)
+      test_set_accuracy = tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TEST,
+                                                         target_dtype=np.int,
+                                                         features_dtype=np.float32,
+                                                         target_column=-1)
 
-# Fitting model
-      classifier = classifier.fit(training_set.data, training_set.target, steps=2000)
+      # Specify that all features have real-value data
+      feature_columns_accuracy = [tf.contrib.layers.real_valued_column("", dimension=2)]
+
+      # Build 3 layer DNN with 10, 20, 10 units respectively.
+      classifier_accuracy = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
+                                                  hidden_units=[10, 20, 10],
+                                                  n_classes=2,
+                                                  model_dir="/tmp/cancer_model")
+
+
+      ##########################################
+
+      #classifier
+      # Fitting model
+      classifier_classifier = classifier_classifier.fit(training_set_classifier.data, training_set_classifier.target, steps=2000)
       k =a
       l = b
       m =c
@@ -64,13 +89,37 @@ def compute ( a,b,c,d,e,z,g,h,i):
           return np.array([[k, l, m, n, o, p, q, r, s],
                    ], dtype=np.float32)
 
-      s = list(classifier.predict(input_fn=new_samples))
+      s = list(classifier_classifier.predict(input_fn=new_samples))
 
+      # Accuracy
+      # Fit model.
+      classifier_accuracy.fit(x=training_set_accuracy.data,
+                     y=training_set_accuracy.target,
+                     steps=2000)
+
+      # Evaluate accuracy.
+      accuracy_score = classifier_accuracy.evaluate(x=test_set_accuracy.data,
+                                           y=test_set_accuracy.target)["accuracy"]
+      # print('Accuracy: {0:f}'.format(accuracy_score*100))
 
       if (s == [[1]]):
-            return "MALIGNANT"
+            return ("MALIGNANT",accuracy_score*100)
       else:
-            return "BENIGN"
+            return ("BENIGN",accuracy_score*100)
+      ################################
+
+      # Classify two new cancer tumor samples.
+      # def new_samples():
+      #   return np.array([[5, 10, 8, 4, 7, 4, 8, 11, 2],
+      #                    [5, 1, 1, 1, 1, 1, 1, 1, 2]], dtype=np.float32)
+      #
+      # predictions = list(classifier.predict(input_fn=new_samples))
+      #
+      # print(
+      #       "New Samples, Class Predictions:    {}\n"
+      #       .format(predictions))
+      ####################################
+
 
 if __name__ == '__main__':
 
