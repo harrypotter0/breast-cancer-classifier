@@ -7,11 +7,11 @@
 * The motivation for applying neural nets at cancer in particular came from Cancer Research's Citizen Science. This is a project that relied on volunteers to classify images of breast cancer tumours. The images themselves contained a mixture of different looking cells. Despite having over 2,000,000 contributions, the project struggled to differentiate cancer cells from non-cancer cells. Relying on volunteers to manually classify cancer seemed both inefficient and ineffective, and I believed that neural nets could provide a better method for classifying cancer.
 
 * The attributes in the sample are in the range (1-10). So, doctors will enter the values of attributes and clicking on the compute button can tell whether it's benign or malignant.
-* Video : (will be available soon)  
+* Video : https://www.youtube.com/watch?v=fos8E_96waU
 
 ### Requirements ###
 
 * Python >=2.7.14
-* TensorFlow >= 1.0.0
+* TensorFlow >= 1.4.0
 * Flask
 * Heroku

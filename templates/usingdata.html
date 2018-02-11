@@ -20,8 +20,7 @@
 	{% if result[0] != None %}
 	<p>Tumor is <b><i><u>{{result[0]}}</u></i></b> </p>
 	<p>Accuracy is <b><i><u>{{result[1]}}</u></i></b> </p>
-	<p>Accuracy is <b><i><u>{{ "%.2f"|format(result[1]) }}</u></i></b> </p>
-
+  
 	{% endif %}
 	</p>
 	{% if result[0] == "BENIGN"%}
