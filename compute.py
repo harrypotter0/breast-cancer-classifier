@@ -42,9 +42,9 @@ def compute ( a,b,c,d,e,z,g,h,i):
       test_set_classifier =     tf.contrib.learn.datasets.base.load_csv_with_header(filename=CANCER_TEST,
                                                    target_dtype=np.int, features_dtype=np.int)
 
-      feature_columns_classifier = [tf.contrib.layers.real_valued_column("", dimension=9)]
+      feature_columns = [tf.contrib.layers.real_valued_column("", dimension=9)]
 
-      classifier_classifier = tf.contrib.learn.DNNClassifier(feature_columns_classifier=feature_columns,
+      classifier_classifier = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                               hidden_units=[10, 20, 10],
                                               n_classes=2,
                                               model_dir="/tmp/iris_model")
@@ -61,13 +61,13 @@ def compute ( a,b,c,d,e,z,g,h,i):
                                                          target_column=-1)
 
       # Specify that all features have real-value data
-      feature_columns_accuracy = [tf.contrib.layers.real_valued_column("", dimension=2)]
+      feature_columns = [tf.contrib.layers.real_valued_column("", dimension=2)]
 
       # Build 3 layer DNN with 10, 20, 10 units respectively.
-      classifier_accuracy = tf.contrib.learn.DNNClassifier(feature_columns_accuracy=feature_columns,
+      classifier_accuracy = tf.contrib.learn.DNNClassifier(feature_columns=feature_columns,
                                                   hidden_units=[10, 20, 10],
                                                   n_classes=2,
-                                                  model_dir="/tmp/cancer_model")
+                                                  model_dir="/tmp/iris_model")
 
 
       ##########################################
