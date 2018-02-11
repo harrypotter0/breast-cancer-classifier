@@ -6,7 +6,7 @@
 * This repo contains two main sections:
 
   -  dnn_data_classifier - A Deep Neural Network implementation to classify breast cancer tumours as benign or malignant depending on measurements taken directly from tumours.
-  -  cnn_image_classifier - A Convolutional Neural Network implementation to classify breast tumours as benign or malignant using images of histology slides.
+  -  cnn_image_classifier - A Convolutional Neural Network implementation to classify breast tumours as benign or malignant using images of histology slides(histopathological images).
 * The motivation for applying neural nets at cancer in particular came from Cancer Research's Citizen Science. This is a project that relied on volunteers to classify images of breast cancer tumours. The images themselves contained a mixture of different looking cells. Despite having over 2,000,000 contributions, the project struggled to differentiate cancer cells from non-cancer cells. Relying on volunteers to manually classify cancer seemed both inefficient and ineffective, and I believed that neural nets could provide a better method for classifying cancer.
 
 * The attributes in the sample are in the range (1-10). So, doctors will enter the values of attributes and clicking on the compute button can tell whether it's benign or malignant.

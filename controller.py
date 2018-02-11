@@ -4,6 +4,7 @@ from compute import compute
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     # form = InputForm(request.form)
