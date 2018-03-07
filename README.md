@@ -15,3 +15,4 @@
 * TensorFlow >= 1.4.0
 * Flask
 * Heroku
+# diabetics-detector
